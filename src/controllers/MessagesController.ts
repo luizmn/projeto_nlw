@@ -21,8 +21,17 @@ class MessagesController {
           return response
           .status(400)
           .json({ message: err.message });
-
       }
+    }
+
+    //host:port/user_id
+    async showByUser(request: Request, response: Response) {
+        const { id } = request.params;
+        const messagesService = new MessagesService();
+
+        const list = await messagesService.listByUser(id);
+
+        return response.json(list);
     }
 }
 
